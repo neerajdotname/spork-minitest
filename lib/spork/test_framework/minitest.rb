@@ -1,11 +1,11 @@
 class Spork::TestFramework::MiniTest < Spork::TestFramework
   DEFAULT_PORT = 8988
-  HELPER_FILE = File.join(Dir.pwd, "test/test_helper.rb")
+  HELPER_FILE = File.join(Dir.pwd, "spec/spec_helper.rb")
 
   def run_tests(argv, stderr, stdout)
-    require "minitest/unit"
+    require "minitest/spec"
     $LOAD_PATH << "test" << "."
-    ::MiniTest::Unit.output = stdout
+    ::MiniTest::Spec.output = stdout
 
     paths, opts = parse_options(argv)
 
@@ -13,7 +13,7 @@ class Spork::TestFramework::MiniTest < Spork::TestFramework
       require path
     end
 
-    ::MiniTest::Unit.new.run(opts)
+    ::MiniTest::Spec.new.run(opts)
   end
 
   def parse_options(argv)
